@@ -1,0 +1,66 @@
+﻿@model List<BlobModel>
+
+@{
+
+    ViewData["Title"] = "ReadContainer";
+
+    string containerName = (string)ViewData["CONTAINER"];
+
+}
+ 
+<h1>ReadContainer</h1>
+ 
+<p>
+<a asp-action="UploadBlob" asp-route-containerName="@containerName">Upload New</a>
+</p>
+<table class="table">
+<thead>
+<tr>
+<th>
+
+                Nombre
+</th>
+<th>
+
+                Archivo
+</th>
+<th>
+
+                Imagen
+</th>
+<th>
+
+                Container
+</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+
+@foreach (var item in Model) {
+<tr>
+<td>
+
+                @Html.DisplayFor(modelItem => item.Nombre)
+</td>
+<td>
+                @item.Nombre
+</td>
+<td>
+<img src="@item.Url" style="width: 100px; height: auto"/>
+</td>
+<td>                
+
+                    @Html.ActionLink("Eliminar", "DeleteBlob", new { containerName = containerName, blobName = item.Nombre })
+</td>
+</tr>
+
+}
+</tbody>
+</table>
+
+<script>
+window.addEventListener('beforeunload', function () {
+    navigator.sendBeacon('@Url.Action("CleanupImages", "AzureBlob")');
+});
+</script>
