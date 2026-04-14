@@ -1,0 +1,80 @@
+﻿@model List<Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form method="post">
+    <label>Introduce empresa</label>
+    <input type="text" name="empresa" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+</form>
+<p>
+    <a asp-asp-controller="AzureTable" asp-action="Create">Create New</a>
+</p>
+@if(Model!=null){
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+               Salario
+            </th>
+            <th>
+               IdCliente
+            </th>
+            <th>
+                Empresa
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartitionKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestamp)
+            </td>
+            <td>
+                    
+                    @Html.ActionLink("Details", "Detalles", new { partitionKey = item.Empresa, rowKey = item.IdCliente }) |
+                    @Html.ActionLink("Delete", "Delete", new { partitionKey = item.Empresa, rowKey = item.IdCliente })
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>            
+}
+else
+{
+    <h1 style="color:red">No hay clientes debe crear clientes</h1>
+}
+
