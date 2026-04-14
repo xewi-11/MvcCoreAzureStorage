@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="ApiTokensAzureStorage/ApiTokensAzureStorage.csproj" Id="d5a00732-3ff0-4345-b322-4351926c161f" />
   <Project Path="MvcCoreAzureStorage/MvcCoreAzureStorage.csproj" />
 </Solution>
